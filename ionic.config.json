@@ -1,0 +1,7 @@
+{
+  "name": "sesionApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

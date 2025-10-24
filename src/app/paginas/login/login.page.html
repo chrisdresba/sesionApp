@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>LOGIN</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email" required></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" [routerLink]="['/registro']">Ir a Registro</ion-button>
+</ion-footer>
