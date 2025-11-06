@@ -1,0 +1,109 @@
+ion-header{
+    --background: #3b82f6;
+    background: #3b82f6;
+}
+
+.titulo-toolbar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: #ffffff;
+}
+
+ion-back-button{
+    color: #ffffff;
+}
+
+ion-content{
+    width: 100%;
+    height: 100%;
+}
+
+ion-content {
+  background: #f5f5f5 !important;
+}
+
+.register-content {
+  --background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.register-card {
+  height: 100%;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.input-item {
+  --background: transparent;
+  margin-top: 12px;
+}
+
+ion-input {
+  --color: #0f172a;
+  margin-top: .5rem;
+}
+
+.register-button {
+  margin-top: 25px;
+  --background: #06b6d4;
+  --background-hover: #0891b2;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 10px rgba(6, 182, 212, 0.3);
+}
+
+.login-button {
+  margin-top: 25px;
+  background: #3b82f6;
+  --background-hover: #2563eb;
+  border-radius: 10px;
+  --box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+  padding: 2px;
+}
+
+#scanner-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scanner-area {
+  width: 260px;
+  height: 200px;
+  border: 3px solid #00ff90;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+  background: transparent;
+}
+

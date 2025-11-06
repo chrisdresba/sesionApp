@@ -1,0 +1,77 @@
+<ion-header translucent="true">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo-toolbar">Datos Personales</ion-title>
+</ion-header>
+
+
+<ion-content class="register-content">
+  <div class="register-container">
+    <ion-card class="register-card">
+      <ion-card-header>
+        <ion-card-title>Validación de identidad</ion-card-title>
+        <ion-card-subtitle>Escaneá tu DNI y completá tu domicilio</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div *ngIf="!datosDni">
+          <ion-button expand="block" (click)="escanearDni()" class="register-button">
+            Escanear DNI
+          </ion-button>
+        </div>
+
+        <div id="scanner-overlay" *ngIf="mostrandoScanner">
+          <div class="scanner-area"></div>
+        </div>
+
+        <ng-container *ngIf="datosDni">
+          <form [formGroup]="formDatos" (ngSubmit)="guardarDatos()">
+            <ion-item class="input-item">
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input formControlName="nombre" readonly></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input formControlName="apellido" readonly></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">DNI</ion-label>
+              <ion-input formControlName="dni" readonly></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Fecha Nacimiento</ion-label>
+              <ion-input formControlName="fecha" readonly></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Calle</ion-label>
+              <ion-input formControlName="calle"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Número</ion-label>
+              <ion-input type="number" formControlName="numero"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Localidad</ion-label>
+              <ion-input formControlName="localidad"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Provincia</ion-label>
+              <ion-input formControlName="provincia"></ion-input>
+            </ion-item>
+          </form>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<ion-footer *ngIf="datosDni">
+  <ion-button expand="block" (click)="guardarDatos()" class="login-button" type="submit" [disabled]="formDatos.invalid">Guardar Datos</ion-button>
+</ion-footer>

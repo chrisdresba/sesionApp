@@ -1,14 +1,15 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, User, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private auth: Auth = inject(Auth);
 
-  constructor(private router: Router) {}
+  constructor(  
+    private auth: Auth,
+    private router: Router) {}
 
   async register(email: string, password: string) {
     try {
@@ -32,6 +33,15 @@ export class AuthService {
       console.log('Error al iniciar sesión:', error);
       throw error;
     }
+  }
+
+  async getCurrentUser(): Promise<User | null> {
+    return new Promise((resolve) => {
+      const unsubscribe = onAuthStateChanged(this.auth, (user) => {
+        unsubscribe(); 
+        resolve(user ?? null);
+      });
+    });
   }
 
   async logout() {

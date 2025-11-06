@@ -9,7 +9,6 @@ export class Usuario {
     dni?: number;         
     fechaNacimiento: string = "";
     direccion?: Direccion;
-    tipo:string = "";
 
     constructor(email: string,uid:string) {
         this.email = email;

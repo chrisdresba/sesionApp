@@ -1,24 +1,64 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>LOGIN</ion-title>
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <ion-list>
-      <ion-item lines="none">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" formControlName="email" required></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" formControlName="password" required></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
-  </form>
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-container">
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Bienvenido</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">
+          Accede con tu cuenta
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <ion-list lines="none">
+            <ion-item class="input-item">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input
+                type="email"
+                formControlName="email"
+                required
+                autocomplete="email"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input
+                type="password"
+                formControlName="password"
+                required
+                autocomplete="current-password"
+              ></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-button
+            expand="block"
+            type="submit"
+            class="login-button"
+            [disabled]="!loginForm.valid"
+          >
+            Iniciar Sesión
+          </ion-button>
+        </form>
+        <div class="register-link" (click)="navegar()">
+          <p>¿No tienes cuenta?</p>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="light"
+            class="create-button"
+          >
+            Crear una cuenta
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
-<ion-footer>
-  <ion-button expand="full" [routerLink]="['/registro']">Ir a Registro</ion-button>
-</ion-footer>

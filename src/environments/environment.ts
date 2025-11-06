@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCyheUE8Zs5mnXtLDuFcN5Lq5hkPomBvmA",
-    authDomain: "simulaciontp.firebaseapp.com",
-    projectId: "simulaciontp",
-    storageBucket: "simulaciontp.firebasestorage.app",
-    messagingSenderId: "471088431018",
-    appId: "1:471088431018:web:7c0599c9c1c74a351835d3"
-  
+    apiKey: "AIzaSyAR_3YOxIaC6IKobcwfW0tF2kl8WimJ8FA",
+    authDomain: "appsesion-f7b1e.firebaseapp.com",
+    databaseURL: "https://appsesion-f7b1e-default-rtdb.firebaseio.com",
+    projectId: "appsesion-f7b1e",
+    storageBucket: "appsesion-f7b1e.appspot.com",
+    messagingSenderId: "204055205195",
+    appId: "1:204055205195:web:d56e52d49ee236acf544ce"
   }
 };
 

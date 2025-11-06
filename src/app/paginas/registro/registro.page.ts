@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Usuario } from 'src/app/shared/clases/usuario/usuario';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/shared/servicios/auth-service/auth.service';
 import { UsuarioService } from 'src/app/shared/servicios/usuario-service/usuario.service';
 
@@ -9,12 +8,16 @@ import { UsuarioService } from 'src/app/shared/servicios/usuario-service/usuario
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
+  standalone: false
 })
 export class RegistroPage implements OnInit {
 
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,private authService: AuthService,private router: Router,private usuarioService:UsuarioService) {}
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private nav: NavController,
+    private usuarioService:UsuarioService) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -43,13 +46,17 @@ export class RegistroPage implements OnInit {
         const uid = credential.user?.uid; 
         if (uid) {
           this.usuarioService.registrarUsuario(email, uid); 
-          this.router.navigate(['/login']);
+          this.nav.navigateForward('/login');
         }
       })
       .catch(error => {
         console.log('Error en registro:',error);
       });
     }
+  }
+
+  navegarLogin(){
+    this.nav.navigateForward('/login');
   }
 }
 

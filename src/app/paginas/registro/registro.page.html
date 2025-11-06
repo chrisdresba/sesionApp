@@ -1,25 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>REGISTRO</ion-title>
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <ion-list>
-      <ion-item lines="none">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" formControlName="email" required></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" formControlName="password" required></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label position="floating">Confirmar Contraseña</ion-label>
-        <ion-input type="password" formControlName="confirmPassword" required></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">Registrar</ion-button>
-  </form>
+<ion-content [fullscreen]="true" class="register-content">
+  <div class="register-container">
+    <ion-card class="register-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Crear cuenta</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">
+          Completa tus datos para continuar
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <ion-list lines="none">
+            <ion-item class="input-item">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email" required autocomplete="email"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" formControlName="password" required autocomplete="new-password"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-item">
+              <ion-label position="floating">Confirmar contraseña</ion-label>
+              <ion-input type="password" formControlName="confirmPassword" required autocomplete="new-password"></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-button expand="block" type="submit" class="register-button" [disabled]="!registerForm.valid">
+            Registrar
+          </ion-button>
+        </form>
+        <div class="login-link" (click)="navegarLogin()">
+          <p>¿Ya tienes una cuenta?</p>
+          <ion-button fill="clear" size="small" color="light" class="login-button">
+            Iniciar sesión
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

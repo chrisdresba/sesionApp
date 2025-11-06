@@ -1,4 +1,77 @@
-ion-button{
-    color: white;
-    font-weight: 600;
+ion-content{
+    background: #f5f5f5 !important;
+}
+
+.login-content {
+  height: 100%;
+  --background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.login-card {
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.input-item {
+  --background: transparent;
+  margin-top: 12px;
+}
+
+ion-input {
+  --color: #0f172a;
+}
+
+.login-button {
+  margin-top: 25px;
+  --background: #3b82f6;
+  --background-hover: #2563eb;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.create-button {
+  margin-top: 25px;
+  background: #06b6d4;
+  --background-hover: #06b6d4;
+  border-radius: 10px;
+  padding: 2px;
+  --box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
+
+.register-link p {
+  color:#3b82f6;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
 }

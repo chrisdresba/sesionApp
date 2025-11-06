@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./paginas/home/home.module').then( m => m.HomePageModule),
     canActivate: [sesionGuard]
+  },
+  {
+    path: 'validar-identidad',
+    loadChildren: () => import('./paginas/datos/datos.module').then( m => m.DatosPageModule)
   }
 ];
 @NgModule({

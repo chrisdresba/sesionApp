@@ -1,15 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>HOME</ion-title>
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-card *ngIf="usuario">
+  <ion-card-content *ngIf="!usuario.estado" (click)="validarUsuario()">
+    Debemos validar tu identidad
+  </ion-card-content>
+  <ion-card-content *ngIf="usuario.estado">
+    Bienvenido {{ usuario.nombre }} {{ usuario.apellido }}
+  </ion-card-content>
+</ion-card>
 </ion-content>
 
 <ion-footer>

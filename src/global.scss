@@ -36,8 +36,21 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+html,
+body,
+ion-app,
+ion-content {
+  background: transparent !important;
+  --background: transparent !important;
+}
+
+.scanner-active {
+  opacity: 0; 
+}
+
 ion-content{
-    --background: #eff1f2;
+  background: #f5f5f5;
+  --background: #f5f5f5;
 }
 
 ion-footer{
@@ -53,10 +66,10 @@ ion-toolbar{
 }
 
 form{
-    --background: #eff1f2;
+    --background: white;
     margin: 1rem;
     ion-list{
-        background: #eff1f2 !important;
+        background: white !important;
     }
 }
 
@@ -66,4 +79,17 @@ ion-item{
     border: 1px solid #3333334f;
     color: black;
     margin-bottom:1rem;
+}
+
+ion-loading.custom-class {
+  --spinner-color: #3988ae !important;
+}
+
+.custom-class .loading-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+.cusstom-class ion-backdrop {
+  opacity: 0.20;
 }
