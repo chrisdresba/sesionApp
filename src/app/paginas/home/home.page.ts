@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/servicios/auth-service/auth.service';
 import { UsuarioService } from 'src/app/shared/servicios/usuario-service/usuario.service';
-import { NavController } from '@ionic/angular';
+import { NavController, RefresherCustomEvent } from '@ionic/angular';
 import { LoadersService } from 'src/app/shared/servicios/loaders-service/loaders.service';
 import { Observable } from 'rxjs';
 import { Pedido } from 'src/app/shared/clases/pedido/pedidos';
@@ -30,7 +30,18 @@ export class HomePage implements OnInit {
       await this.loaders.dismissLoading();
       return;
     }
+    this.buscarDatos();
+    await this.loaders.dismissLoading();
+  }
 
+  handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      this.buscarDatos();
+      event.target.complete();
+    }, 2000);
+  }
+
+  async buscarDatos(){
     const currentUser = await this.authService.getCurrentUser();
    
     if (currentUser?.uid) {
@@ -41,7 +52,6 @@ export class HomePage implements OnInit {
     } else {
       console.warn('No hay usuario autenticado.');
     }
-    await this.loaders.dismissLoading();
   }
 
   validarUsuario(){

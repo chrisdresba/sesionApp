@@ -5,33 +5,39 @@
       <ion-button class="btn-logout" (click)="salir()"><ion-icon name="log-out-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngIf="usuario">
-    <ion-card-content *ngIf="!usuario.estado" (click)="validarUsuario()">
+    <ion-card-content *ngIf="!usuario.estado">
       Debemos validar tu identidad
     </ion-card-content>
     <ion-card-content *ngIf="usuario.estado">
       Bienvenido {{ usuario.nombre }} {{ usuario.apellido }}
     </ion-card-content>
-    <ion-list *ngIf="pedidos$ | async as pedidos">
-      <h5>Tus Pedidos</h5>
-      <ion-item *ngFor="let pedido of pedidos" lines="none">
-        <ion-label>
-          <h2>{{ pedido.nombreReceptor }}</h2>
-          <p>{{ pedido.direccionDestino }}</p>
-        </ion-label>
-        <ion-thumbnail *ngIf="pedido.fotoUrl">
-          <img [src]="pedido.fotoUrl" />
-        </ion-thumbnail>
-      </ion-item>
-    </ion-list>
+    <ng-container *ngIf="usuario.estado">
+      <ion-list *ngIf="pedidos$ | async as pedidos">
+        <h5>Tus Pedidos</h5>
+        <p *ngIf="pedidos.length == 0">No tiene pedidos</p>
+        <ion-item *ngFor="let pedido of pedidos" lines="none">
+          <ion-label>
+            <h2>{{ pedido.nombreReceptor }}</h2>
+            <p>{{ pedido.direccionDestino }}</p>
+          </ion-label>
+          <ion-thumbnail *ngIf="pedido.fotoUrl">
+            <img [src]="pedido.fotoUrl" />
+          </ion-thumbnail>
+        </ion-item>
+      </ion-list>
+    </ng-container>
   </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="full" (click)="crearItem()">Nuevo Item</ion-button>
+  <ion-button expand="full" *ngIf="usuario && usuario.estado" (click)="crearItem()">Nuevo Item</ion-button>
+  <ion-button expand="full" *ngIf="usuario && !usuario.estado" (click)="validarUsuario()">Validar Identidad</ion-button>
 </ion-footer>
 

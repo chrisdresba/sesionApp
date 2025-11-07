@@ -15,6 +15,13 @@ ion-card{
     height: 100%;
 }
 
+.card-validacion{
+    margin: 16px;
+    background: #3b82f6;
+    border-radius: 6px;
+    color: white;
+}
+
 ion-list{
     background: white;
 }
@@ -28,6 +35,10 @@ h5{
     margin-top: 1rem;
     margin-bottom: .5rem;
     color: #333333;
+}
+
+p{
+    margin-left: .5rem;
 }
 
 .btn-logout{

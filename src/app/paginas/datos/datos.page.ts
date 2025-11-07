@@ -36,6 +36,21 @@ export class DatosPage {
     });
   }
 
+  ngOnInit() {
+    // Datos de prueba
+    this.setMock();
+  }
+
+  setMock(){
+    this.datosDni = { dni: 30444555, nombre: 'Alan', apellido: 'Peralta', fecha: '01/01/1990' };
+    this.formDatos.patchValue({
+      nombre: this.datosDni.nombre,
+      apellido: this.datosDni.apellido,
+      dni: this.datosDni.dni,
+      fecha: this.datosDni.fecha,
+    });
+  }
+
   async escanearDni() {
     try {
       this.mostrandoScanner = true;
