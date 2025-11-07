@@ -3,6 +3,9 @@ import { AuthService } from 'src/app/shared/servicios/auth-service/auth.service'
 import { UsuarioService } from 'src/app/shared/servicios/usuario-service/usuario.service';
 import { NavController } from '@ionic/angular';
 import { LoadersService } from 'src/app/shared/servicios/loaders-service/loaders.service';
+import { Observable } from 'rxjs';
+import { Pedido } from 'src/app/shared/clases/pedido/pedidos';
+import { EntidadService } from 'src/app/shared/servicios/entidad-service/entidad-service';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +15,12 @@ import { LoadersService } from 'src/app/shared/servicios/loaders-service/loaders
 })
 export class HomePage implements OnInit {
 
+  pedidos$: Observable<Pedido[]> | undefined;
+
   constructor(private authService: AuthService,
     private usuarioService: UsuarioService,
     private loaders: LoadersService,
+    private entidadService: EntidadService,
     private nav: NavController
   ) { }
 
@@ -29,6 +35,7 @@ export class HomePage implements OnInit {
    
     if (currentUser?.uid) {
       const usuario = await this.usuarioService.obtenerUsuarioPorId(currentUser.uid);
+      this.pedidos$ = this.entidadService.obtenerPedidosPorUsuario(currentUser.uid);
       this.usuarioService.usuario.set(usuario); 
       console.log('Usuario cargado:',usuario);
     } else {
@@ -39,6 +46,10 @@ export class HomePage implements OnInit {
 
   validarUsuario(){
     this.nav.navigateForward('/validar-identidad');
+  }
+
+  crearItem(){
+     this.nav.navigateForward('/detalle');
   }
 
   get usuario() {

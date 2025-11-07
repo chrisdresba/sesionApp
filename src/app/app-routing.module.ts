@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'validar-identidad',
     loadChildren: () => import('./paginas/datos/datos.module').then( m => m.DatosPageModule)
+  },
+  {
+    path: 'detalle',
+    loadChildren: () => import('./paginas/detalle/detalle.module').then( m => m.DetallePageModule)
   }
 ];
 @NgModule({

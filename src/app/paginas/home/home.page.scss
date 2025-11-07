@@ -6,4 +6,31 @@ ion-button{
 ion-content{
     width: 100%;
     height: 100%;
+    background: #F5F5F5!important;
+    --background: #F5F5F5!important;
+}
+
+ion-card{
+    background: white;
+    height: 100%;
+}
+
+ion-list{
+    background: white;
+}
+
+ion-item{
+    margin-inline: .5rem;
+}
+
+h5{
+    margin-left: .5rem;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    color: #333333;
+}
+
+.btn-logout{
+    background: rgb(144, 73, 144);
+    border-radius: .5rem;
 }

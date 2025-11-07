@@ -1,0 +1,66 @@
+<ng-container *ngIf="!modoPresentacion && permissions">
+  <ion-content fullscreen class="content-fotos">
+    <div id="cameraPreview" class="contenedor-camara"></div> 
+    <ion-fab horizontal="center" vertical="bottom" slot="fixed" class="btn-cam">
+      <ion-fab-button class="boton-sacar-foto" (click)="tomarFoto()">
+        <ion-icon class="icon-camera" name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+</ng-container>
+
+<ng-container *ngIf="modoPresentacion">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button
+          text=""
+          icon="chevron-back-outline"
+          defaultHref="/home"
+        ></ion-back-button>
+      </ion-buttons>
+      <ion-title class="titulo-toolbar">Detalle</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-content>
+        <form [formGroup]="formPedido" (ngSubmit)="guardarPedido()">
+          <ion-item lines="none">
+            <ion-label position="floating">Dirección de destino</ion-label>
+            <ion-input formControlName="direccionDestino"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Nombre del receptor</ion-label>
+            <ion-input formControlName="nombreReceptor"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">DNI del receptor</ion-label>
+            <ion-input type="number" formControlName="dniReceptor"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Dirección de retiro</ion-label>
+            <ion-input formControlName="direccionRetiro"></ion-input>
+          </ion-item>
+
+          <ion-button expand="full" class="btn-camera" (click)="prenderCamara()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-button>
+        </form>
+
+        <ion-img *ngIf="fotoBase64" [src]="fotoBase64"></ion-img>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  <ion-footer>
+    <ion-button
+      expand="full"
+      [disabled]="formPedido.invalid"
+      (click)="guardarPedido()"
+      >Nuevo Item</ion-button
+    >
+  </ion-footer>
+</ng-container>

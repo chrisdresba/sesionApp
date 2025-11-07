@@ -1,21 +1,37 @@
 <ion-header translucent="true">
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Home</ion-title>
+    <ion-title class="ion-text-start">Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="btn-logout" (click)="salir()"><ion-icon name="log-out-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-card *ngIf="usuario">
-  <ion-card-content *ngIf="!usuario.estado" (click)="validarUsuario()">
-    Debemos validar tu identidad
-  </ion-card-content>
-  <ion-card-content *ngIf="usuario.estado">
-    Bienvenido {{ usuario.nombre }} {{ usuario.apellido }}
-  </ion-card-content>
-</ion-card>
+  <ion-card *ngIf="usuario">
+    <ion-card-content *ngIf="!usuario.estado" (click)="validarUsuario()">
+      Debemos validar tu identidad
+    </ion-card-content>
+    <ion-card-content *ngIf="usuario.estado">
+      Bienvenido {{ usuario.nombre }} {{ usuario.apellido }}
+    </ion-card-content>
+    <ion-list *ngIf="pedidos$ | async as pedidos">
+      <h5>Tus Pedidos</h5>
+      <ion-item *ngFor="let pedido of pedidos" lines="none">
+        <ion-label>
+          <h2>{{ pedido.nombreReceptor }}</h2>
+          <p>{{ pedido.direccionDestino }}</p>
+        </ion-label>
+        <ion-thumbnail *ngIf="pedido.fotoUrl">
+          <img [src]="pedido.fotoUrl" />
+        </ion-thumbnail>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="full" (click)="salir()">Salir</ion-button>
+  <ion-button expand="full" (click)="crearItem()">Nuevo Item</ion-button>
 </ion-footer>
 
