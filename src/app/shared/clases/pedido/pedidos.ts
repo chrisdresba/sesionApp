@@ -5,6 +5,8 @@ export interface Pedido {
   nombreReceptor: string;
   direccionDestino: string;
   direccionRetiro: string;
-  fotoUrl?: string;           
+  transportistaAsignado?: string;
+  fotoUrl?: string;
+  estado?: string;          
   fechaCreacion: Date;
 }

@@ -119,6 +119,8 @@ export class DetallePage implements OnInit {
         direccionDestino: this.formPedido.value.direccionDestino,
         direccionRetiro: this.formPedido.value.direccionRetiro,
         fechaCreacion: new Date(),
+        estado: 'pendiente',
+        transportistaAsignado: ''
       };
 
       await this.entidadService.crearPedido(pedido, this.fotoBase64 || undefined);

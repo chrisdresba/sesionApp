@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+     <ion-buttons slot="start">
+        <ion-back-button
+          text=""
+          icon="chevron-back-outline"
+          defaultHref="/home"
+        ></ion-back-button>
+      </ion-buttons>
+    <ion-title>Detalle del Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pedido">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Pedido</ion-card-title>
+      <p>#{{ pedido.id }}</p>
+    </ion-card-header>
+
+
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-label>Destino</ion-label>
+        <ion-text>{{ pedido.direccionDestino }}</ion-text>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Receptor</ion-label>
+        <ion-text>{{ pedido.nombreReceptor }} - DNI: {{ pedido.dniReceptor }}</ion-text>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Dirección de retiro</ion-label>
+        <ion-text>{{ pedido.direccionRetiro }}</ion-text>
+      </ion-item>
+
+      <ion-item lines="none" *ngIf="usuario && usuario.perfil === 'transportista'">
+        <ion-label>Estado actual</ion-label>
+        <ion-select [value]="pedido.estado" (ionChange)="cambiarEstado($event)">
+          <ion-select-option *ngFor="let est of estados" [value]="est">
+            {{ est }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="pedido.fotoUrl" lines="none">
+        <ion-thumbnail slot="start">
+          <img [src]="pedido.fotoUrl" />
+        </ion-thumbnail>
+        <ion-label>Foto del pedido</ion-label>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

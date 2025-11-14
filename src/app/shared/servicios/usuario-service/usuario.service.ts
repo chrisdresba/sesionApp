@@ -35,7 +35,8 @@ export class UsuarioService {
 
       if (snap.exists()) {
         const data = snap.data() as Usuario;
-        this.usuario.set(data); 
+        this.usuario.set(data);
+        
         return data;
       } else {
         console.warn(`No se encontró usuario con UID: ${uid}`);

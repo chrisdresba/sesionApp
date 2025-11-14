@@ -22,7 +22,7 @@
       <ion-list *ngIf="pedidos$ | async as pedidos">
         <h5>Tus Pedidos</h5>
         <p *ngIf="pedidos.length == 0">No tiene pedidos</p>
-        <ion-item *ngFor="let pedido of pedidos" lines="none">
+        <ion-item *ngFor="let pedido of pedidos" lines="none" (click)="verDetalle(pedido)">
           <ion-label>
             <h2>{{ pedido.nombreReceptor }}</h2>
             <p>{{ pedido.direccionDestino }}</p>

@@ -6,6 +6,7 @@ import { LoadersService } from 'src/app/shared/servicios/loaders-service/loaders
 import { Observable } from 'rxjs';
 import { Pedido } from 'src/app/shared/clases/pedido/pedidos';
 import { EntidadService } from 'src/app/shared/servicios/entidad-service/entidad-service';
+import { Usuario } from 'src/app/shared/clases/usuario/usuario';
 
 @Component({
   selector: 'app-home',
@@ -26,11 +27,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.loaders.presentLoading();
-    if (this.usuario) {
-      await this.loaders.dismissLoading();
-      return;
-    }
-    this.buscarDatos();
+    await this.buscarDatos();
     await this.loaders.dismissLoading();
   }
 
@@ -45,10 +42,14 @@ export class HomePage implements OnInit {
     const currentUser = await this.authService.getCurrentUser();
    
     if (currentUser?.uid) {
-      const usuario = await this.usuarioService.obtenerUsuarioPorId(currentUser.uid);
-      this.pedidos$ = this.entidadService.obtenerPedidosPorUsuario(currentUser.uid);
-      this.usuarioService.usuario.set(usuario); 
-      console.log('Usuario cargado:',usuario);
+      const user = await this.usuarioService.obtenerUsuarioPorId(currentUser.uid);
+      this.usuarioService.usuario.set(user);
+      if(this.usuario?.perfil === 'transportista'){
+        this.pedidos$ = this.entidadService.obtenerPedidosPendientes();
+      } else {
+        this.pedidos$ = this.entidadService.obtenerPedidosPorUsuario(currentUser.uid);
+      }
+      console.log('Usuario cargado:',this.usuario);
     } else {
       console.warn('No hay usuario autenticado.');
     }
@@ -60,6 +61,10 @@ export class HomePage implements OnInit {
 
   crearItem(){
      this.nav.navigateForward('/detalle');
+  }
+
+  verDetalle(pedido: Pedido){
+    this.nav.navigateForward(`/pedido-detalle/${pedido.id}`);
   }
 
   get usuario() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, setDoc, collection, query, where, getDocs, collectionData } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection, query, where, getDocs, collectionData, updateDoc, docData } from '@angular/fire/firestore';
 import { ref, uploadBytes, uploadString, getDownloadURL, Storage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { Pedido } from '../../clases/pedido/pedidos';
@@ -30,6 +30,7 @@ export class EntidadService {
       await setDoc(pedidoRef, {
         ...pedido,
         fotoUrl,
+        id:pedidoId,
         fechaCreacion: new Date(),
       });
 
@@ -39,6 +40,54 @@ export class EntidadService {
     }
   }
 
+  async aceptarPedido(idPedido: string, uidTransportista: string) {
+    const pedidoRef = doc(this.firestore, `pedidos/${idPedido}`);
+
+    await updateDoc(pedidoRef, {
+      estado: 'aceptado',
+      transportistaAsignado: uidTransportista
+    });
+  }
+
+  actualizarEstadoPedido(id: string, estado: string) {
+    const docRef = doc(this.firestore, `pedidos/${id}`);
+    return updateDoc(docRef, { estado });
+  }
+
+  obtenerPedidosPendientes(): Observable<Pedido[]> {
+    const pedidosRef = collection(this.firestore, 'pedidos');
+    const q = query(
+      pedidosRef,
+      where('estado', '==', 'pendiente')
+    );
+
+    return collectionData(q, { idField: 'id' }) as Observable<Pedido[]>;
+  }
+
+  obtenerPedidosAsignados(uidTransportista: string): Observable<Pedido[]> {
+    const pedidosRef = collection(this.firestore, 'pedidos');
+    const q = query(
+      pedidosRef,
+      where('transportistaAsignado', '==', uidTransportista)
+    );
+
+    return collectionData(q, { idField: 'id' }) as Observable<Pedido[]>;
+  }
+
+  obtenerTodosLosPedidosDelTransportista(uidTransportista: string): Observable<Pedido[]> {
+    const pedidosRef = collection(this.firestore, 'pedidos');
+    const q = query(
+      pedidosRef,
+      where('transportistaAsignado', '==', uidTransportista)
+    );
+
+    return collectionData(q, { idField: 'id' }) as Observable<Pedido[]>;
+  }
+
+  obtenerPedidoPorId(id: string): Observable<Pedido | undefined> {
+    const ref = doc(this.firestore, `pedidos/${id}`);
+    return docData(ref, { idField: 'id' }) as Observable<Pedido | undefined>;
+  }
 
   obtenerPedidosPorDni(dniReceptor: string): Observable<Pedido[]> {
     const pedidosRef = collection(this.firestore, 'pedidos');

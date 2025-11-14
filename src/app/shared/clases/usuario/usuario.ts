@@ -6,7 +6,8 @@ export class Usuario {
     estado: boolean;        
     nombre: string = "";       
     apellido?: string = "";   
-    dni?: number;         
+    dni?: number;
+    perfil?: string = "";         
     fechaNacimiento: string = "";
     direccion?: Direccion;
 
